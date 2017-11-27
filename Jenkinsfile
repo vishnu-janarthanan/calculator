@@ -31,31 +31,5 @@ stage("Static code analysis") {
                reportName: "Checkstyle Report" ])
       }
     }
-  stage("Build") {
-      steps {
-        sh "./gradlew build"
-      }
-    }
-
-    stage("Docker build") {
-      steps {
-        sh "docker build -t vishnu-janarthanan/calculator:${BUILD_TIMESTAMP} ."
-      }
-    }
-
-    stage("Docker login") {
-      steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'leszko',
-                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-          sh "docker login --username $vishnuselva --password $Selva143"
-        }
-      }
-    }
-
-    stage("Docker push") {
-      steps {
-        sh "docker push leszko/calculator:${BUILD_TIMESTAMP}"
-      }
-    }
  }
 }
