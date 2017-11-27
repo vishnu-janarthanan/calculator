@@ -31,5 +31,5 @@ stage("Static code analysis") {
                reportName: "Checkstyle Report" ])
       }
     }
-}
+ }
 }
